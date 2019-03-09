@@ -3,8 +3,15 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-Vue.config.productionTip = false
+import iView from 'iview';
+import 'iview/dist/styles/iview.css';
 
+Vue.use(iView)
+
+
+Vue.config.productionTip = false
+// import * as THREE from 'three'
+// Vue.THREE = Vue.prototype.$THREE=THREE;
 new Vue({
   router,
   store,
