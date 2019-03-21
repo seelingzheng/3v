@@ -12,7 +12,7 @@ var routes = [{
   path: '*',
   redirect: '/',
 }]
-let files = require.context('./views', false, /\.vue$/)
+let files = require.context('./views', true, /\.vue$/)
 
 files.keys().forEach(key => {
   let name = key.split('/').pop().split('.').shift();

@@ -6,11 +6,18 @@
           <Submenu name="1">
             <template slot="title">
               <Icon type="ios-navigate"></Icon>
-              <span>ThreeJS API 案例</span>
+              <span>API Demo</span>
             </template>
             <MenuItem name="hello">Hello</MenuItem>
             <MenuItem name="graphic">图形</MenuItem>
-            <MenuItem name="1-3">举报管理</MenuItem>
+          </Submenu>
+          <Submenu name="2">
+            <template slot="title">
+              <Icon type="ios-navigate"></Icon>
+              <span>Shader Demo</span>
+            </template>
+            <MenuItem name="triangle">三角形</MenuItem>
+            <MenuItem name="transfer">模型变换</MenuItem>
           </Submenu>
         </Menu>
       </Sider>
