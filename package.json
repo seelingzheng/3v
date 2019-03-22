@@ -10,7 +10,12 @@
     "@types/three": "^0.93.22",
     "iview": "^3.3.0",
     "three": "^0.102.1",
+    "three-fbx-loader": "^1.0.3",
+    "three-full": "^17.1.0",
+    "three-gltf-loader": "^1.102.0",
+    "three-gpu-particle-system": "^1.0.0",
     "three-orbitcontrols": "^2.102.1",
+    "three-stats": "^1.0.1",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

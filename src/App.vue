@@ -9,6 +9,7 @@
               <span>API Demo</span>
             </template>
             <MenuItem name="hello">Hello</MenuItem>
+            <MenuItem name="material">material</MenuItem>
             <MenuItem name="graphic">图形</MenuItem>
           </Submenu>
           <Submenu name="2">
@@ -18,6 +19,8 @@
             </template>
             <MenuItem name="triangle">三角形</MenuItem>
             <MenuItem name="transfer">模型变换</MenuItem>
+            <MenuItem name="gltf">gltfloader</MenuItem>
+            <MenuItem name="fbx">fbxloader 粒子系统</MenuItem>
           </Submenu>
         </Menu>
       </Sider>
@@ -30,6 +33,15 @@
   </div>
 </template>
  <script>
+document.addEventListener(
+  "touchmove",
+  function(event) {
+    event.preventDefault();
+  },
+  {
+    passive: false
+  }
+);
 export default {
   methods: {
     onSelect(name) {
@@ -40,7 +52,7 @@ export default {
 </script>
  
 
-<style>
+<style lang='scss' scoped>
 body {
   margin: 0;
   padding: 0;
@@ -50,5 +62,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+.btn-box {
+  user-select: none;
+  position: absolute;
+  width: 80%;
+  right: 10px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  background: #0c0c7566;
+  border-radius: 5px;
+  &-item {
+    cursor: pointer;
+    padding: 3px;
+    color: white;
+    &:hover,
+    &-selected {
+      color: aqua;
+    }
+  }
 }
 </style>

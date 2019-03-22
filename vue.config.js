@@ -7,7 +7,8 @@ let cesiumSource = './node_modules/cesium/Source'
 let cesiumWorkers = '../Build/Cesium/Workers'
 // let cesiumWorkers = 'Workers'
 module.exports = {
-  baseUrl: '',
+  // baseUrl: '',
+  publicPath: '',
   devServer: {
     open: false,
     https: false,

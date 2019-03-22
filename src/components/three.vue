@@ -4,13 +4,18 @@
 <script>
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
+import Stats from "three-stats";
+
 export default {
   props: ["options"],
   data() {
     return {
       camera: null,
       scene: null,
-      renderer: null
+      renderer: null,
+      stats: null,
+      HEIGHT: window.innerHeight,
+      WIDTH: window.innerWidth
     };
   },
   mounted() {
@@ -32,7 +37,7 @@ export default {
     if (opt.isCreateCamera) {
       this.camera = new THREE.PerspectiveCamera(
         75,
-        window.innerWidth / window.innerHeight,
+        this.WIDTH / this.HEIGHT,
         0.1,
         1000
       );
@@ -65,6 +70,7 @@ export default {
     }
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     baseDom.appendChild(this.renderer.domElement);
+    // this.initStats();
     this.initRenderer();
 
     this.$emit("threeLoaded", {
@@ -73,10 +79,37 @@ export default {
       renderer: this.renderer,
       orbitControl
     });
+
+    // 监听屏幕，缩放屏幕更新相机和渲染器的尺寸
+    window.addEventListener(
+      "resize",
+      this.handleWindowResize.bind(this),
+      false
+    );
   },
   methods: {
     initRenderer() {
       if (this.camera) this.renderer.render(this.scene, this.camera);
+      // this.stats.update();
+    },
+    handleWindowResize() {
+      // 更新渲染器的高度和宽度以及相机的纵横比
+      this.HEIGHT = window.innerHeight;
+      this.WIDTH = window.innerWidth;
+      this.renderer.setSize(this.WIDTH, this.HEIGHT);
+      this.camera.aspect = this.WIDTH / this.HEIGHT;
+      this.camera.updateProjectionMatrix();
+      // 作者：youngdro
+      // 链接：https://juejin.im/post/5b0ace63f265da0db479270a
+    },
+    initStats() {
+      this.stats = new Stats();
+      // 将性能监控屏区显示在左上角
+      this.stats.domElement.style.position = "absolute";
+      this.stats.domElement.style.bottom = "0px";
+      this.stats.domElement.style.zIndex = 100;
+      this.container = document.getElementById("base");
+      this.container.appendChild(this.stats.domElement);
     }
   }
 };
