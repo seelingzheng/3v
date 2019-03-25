@@ -7,8 +7,8 @@
 import three from "@/components/three";
 import * as THREE from "three";
 import GLTFLoader from "three-gltf-loader";
-import { fbx } from "@/shaders";
-// import { gltf } from "@/shaders";
+// import { fbx } from "@/shaders";
+import { gltf } from "@/shaders";
 export default {
   name: "",
 

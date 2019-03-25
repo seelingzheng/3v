@@ -14,7 +14,14 @@ export default {
         showAxesHeleper: true
       },
 
-      T: { camera: null, scene: null, renderer: null, orbitControl: null }
+      T: {
+        camera: null,
+        scene: null,
+        renderer: null,
+        orbitControl: null,
+        stats: null
+      },
+      mesh: null
     };
   },
   components: {
@@ -49,8 +56,14 @@ export default {
 
       var point = new THREE.Points(geometry, material);
       var line = new THREE.Line(geometry, material);
-      var mesh = new THREE.Mesh(geometry, material);
-      this.T.scene.add(line);
+      this.mesh = new THREE.Mesh(geometry, material);
+      this.T.scene.add(this.mesh);
+      this.doRender();
+    },
+    doRender() {
+      this.T.stats.update();
+
+      requestAnimationFrame(this.doRender);
     }
   }
 };

@@ -18,7 +18,14 @@ export default {
         isCreateCamera: true
       },
 
-      T: { camera: null, scene: null, renderer: null, orbitControl: null }
+      T: {
+        camera: null,
+        scene: null,
+        renderer: null,
+        orbitControl: null,
+        stats: null
+      },
+      mesh: null
     };
   },
   components: {
@@ -37,15 +44,23 @@ export default {
         fragmentShader: transfer.fragment
       });
 
-      var mesh = new THREE.Mesh(geometry, material);
-      this.T.scene.add(mesh);
-      mesh.rotateX(Math.PI / 6);
-      mesh.rotateY(Math.PI / 6);
+      this.mesh = new THREE.Mesh(geometry, material);
+      this.T.scene.add(this.mesh);
+      this.mesh.rotateX(Math.PI / 6);
+      this.mesh.rotateY(Math.PI / 6);
 
       // 相机设置
 
       console.log(this.T.camera.projectionMatrix);
       console.log(this.T.camera.matrixWorldInverse);
+      this.doRender();
+    },
+    doRender() {
+      this.T.renderer.render(this.T.scene, this.T.camera);
+      this.T.stats.update();
+      this.mesh.rotateX(0.01);
+      this.mesh.rotateY(0.01);
+      requestAnimationFrame(this.doRender);
     }
   }
 };

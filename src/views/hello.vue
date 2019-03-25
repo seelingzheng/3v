@@ -3,7 +3,8 @@
     <three @threeLoaded="tLoaded($event)" :options="options"></three>
     <div class="list">
       <Dropdown trigger="click" style="margin-left: 20px;" @on-click="onChange($event)">
-        <a href="javascript:void(0)">Geometry
+        <a href="javascript:void(0)">
+          Geometry
           <Icon type="ios-arrow-down"></Icon>
         </a>
         <DropdownMenu slot="list">
@@ -32,7 +33,13 @@ export default {
       },
       geometries: null,
       curMesh: null,
-      T: { camera: null, scene: null, renderer: null, orbitControl: null }
+      T: {
+        camera: null,
+        scene: null,
+        renderer: null,
+        orbitControl: null,
+        stats: null
+      }
     };
   },
   components: {
@@ -118,8 +125,8 @@ export default {
         this.curMesh.rotateY(0.01);
         this.curMesh.rotateX(-0.01);
       }
-      this.T.renderer.render(this.T.scene, this.T.camera);
-
+      if (this.T.renderer) this.T.renderer.render(this.T.scene, this.T.camera);
+      this.T.stats.update();
       requestAnimationFrame(this.renderAnimate);
     },
     addLight() {

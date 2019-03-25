@@ -4,7 +4,7 @@
 <script>
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
-import Stats from "three-stats";
+import Stats from "../../public/libs/stats.js";
 
 export default {
   props: ["options"],
@@ -70,27 +70,27 @@ export default {
     }
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     baseDom.appendChild(this.renderer.domElement);
-    // this.initStats();
+    this.initStats();
     this.initRenderer();
 
     this.$emit("threeLoaded", {
       scene: this.scene,
       camera: this.camera,
       renderer: this.renderer,
-      orbitControl
+      orbitControl,
+      stats: this.stats
     });
 
     // 监听屏幕，缩放屏幕更新相机和渲染器的尺寸
-    window.addEventListener(
-      "resize",
-      this.handleWindowResize.bind(this),
-      false
-    );
+    // window.addEventListener(
+    //   "resize",
+    //   this.handleWindowResize.bind(this),
+    //   false
+    // );
   },
   methods: {
     initRenderer() {
       if (this.camera) this.renderer.render(this.scene, this.camera);
-      // this.stats.update();
     },
     handleWindowResize() {
       // 更新渲染器的高度和宽度以及相机的纵横比
@@ -103,7 +103,7 @@ export default {
       // 链接：https://juejin.im/post/5b0ace63f265da0db479270a
     },
     initStats() {
-      this.stats = new Stats();
+      this.stats = Stats();
       // 将性能监控屏区显示在左上角
       this.stats.domElement.style.position = "absolute";
       this.stats.domElement.style.bottom = "0px";

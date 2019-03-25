@@ -19,6 +19,7 @@
             </template>
             <MenuItem name="triangle">三角形</MenuItem>
             <MenuItem name="transfer">模型变换</MenuItem>
+            <MenuItem name="vertexcolor">顶点颜色差值计算</MenuItem>
             <MenuItem name="gltf">gltfloader</MenuItem>
             <MenuItem name="fbx">fbxloader 粒子系统</MenuItem>
           </Submenu>
@@ -52,7 +53,7 @@ export default {
 </script>
  
 
-<style lang='scss' scoped>
+<style lang='scss' >
 body {
   margin: 0;
   padding: 0;
@@ -66,8 +67,9 @@ body {
 .btn-box {
   user-select: none;
   position: absolute;
-  width: 80%;
-  right: 10px;
+  width: auto;
+  top: 20px;
+  right: 100px;
   z-index: 1;
   display: flex;
   flex-wrap: wrap;

@@ -11,3 +11,11 @@ export {
   default as fbx
 }
 from './fbx.js'
+export {
+  default as gltf
+}
+from './gltf.js'
+export {
+  default as vertexcolor
+}
+from './vertexcolor.js'

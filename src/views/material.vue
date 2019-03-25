@@ -1,15 +1,15 @@
 <template>
-  <div class="home">
+  <div>
     <div class="btn-box">
       <div
         class="btn-box-item"
         :class="{'btn-box-item-selected':curName=='single'}"
-        @click="getTerrain('single')"
+        @click="doRender('single')"
       >单图渲染</div>
       <div
         class="btn-box-item"
         :class="{'btn-box-item-selected':curName=='all'}"
-        @click="getTerrain('all')"
+        @click="doRender('all')"
       >整图渲染</div>
     </div>
     <three @threeLoaded="tLoaded($event)" :options="options"></three>
@@ -31,7 +31,14 @@ export default {
       },
       curName: "single",
       geometry: null,
-      T: { camera: null, scene: null, renderer: null, orbitControl: null }
+      T: {
+        camera: null,
+        scene: null,
+        renderer: null,
+        orbitControl: null,
+        stats: null
+      },
+      curMesh: null
     };
   },
   components: {
@@ -44,11 +51,12 @@ export default {
       this.T = threeObj;
 
       this.geometry = new THREE.BoxGeometry(100, 100, 100);
-      this.renderByMaterial();
+      this.doRender("single");
     },
 
     doRender(name) {
       this.curName = name;
+      this.T.scene.remove(this.curMesh);
       if (name == "single") {
         this.renderByMaterial();
       } else {
@@ -82,8 +90,8 @@ export default {
           side: THREE.DoubleSide
         })
       ];
-      let mesh = new THREE.Mesh(this.geometry, cubeMaterials);
-      this.T.scene.add(mesh);
+      this.curMesh = new THREE.Mesh(this.geometry, cubeMaterials);
+      this.T.scene.add(this.curMesh);
       this.renderer();
     },
     renderByFaceVertex() {
@@ -96,13 +104,13 @@ export default {
       var clouds = [
         new THREE.Vector2(0.5, 0.666),
         new THREE.Vector2(1, 0.666),
-        newTHREE.Vector2(1, 1),
+        new THREE.Vector2(1, 1),
         new THREE.Vector2(0.5, 1)
       ];
       var crate = [
         new THREE.Vector2(0, 0.333),
         new THREE.Vector2(0.5, 0.333),
-        newTHREE.Vector2(0.5, 0.666),
+        new THREE.Vector2(0.5, 0.666),
         new THREE.Vector2(0, 0.666)
       ];
       var stone = [
@@ -142,16 +150,20 @@ export default {
       this.geometry.faceVertexUvs[0][10] = [wood[0], wood[1], wood[3]];
       this.geometry.faceVertexUvs[0][11] = [wood[1], wood[2], wood[3]];
       var material = new THREE.MeshPhongMaterial({
-        map: THREE.TextureLoader("images/face/texture-atlas.jpg")
+        map: new THREE.TextureLoader().load("images/face/texture-atlas.jpg"),
+        side: THREE.DoubleSide
       });
-      let mesh = new THREE.Mesh(this.geometry, material);
-      this.T.scene.add(mesh);
+      this.curMesh = new THREE.Mesh(this.geometry, material);
+      this.T.scene.add(this.curMesh);
       this.renderer();
     },
 
     renderer() {
-      requestAnimationFrame(this.renderer);
       this.T.renderer.render(this.T.scene, this.T.camera);
+      this.curMesh.rotateY(0.01);
+      this.curMesh.rotateX(0.01);
+      this.T.stats.update();
+      requestAnimationFrame(this.renderer);
     }
   }
 };
