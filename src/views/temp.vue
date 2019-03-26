@@ -7,7 +7,7 @@
 <script>
 import three from "@/components/three";
 import * as THREE from "three";
-import FBXLoader from "three-fbx-loader";
+ 
 import { fbx } from "@/shaders";
 export default {
   name: "",

@@ -22,6 +22,7 @@
             <MenuItem name="vertexcolor">顶点颜色差值计算</MenuItem>
             <MenuItem name="gltf">gltfloader</MenuItem>
             <MenuItem name="fbx">fbxloader 粒子系统</MenuItem>
+            <MenuItem name="texture">Texture</MenuItem>
           </Submenu>
         </Menu>
       </Sider>

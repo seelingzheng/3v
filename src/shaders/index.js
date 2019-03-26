@@ -19,3 +19,7 @@ export {
   default as vertexcolor
 }
 from './vertexcolor.js'
+export {
+  default as texture
+}
+from './texture.js'
