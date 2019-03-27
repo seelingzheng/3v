@@ -11,6 +11,7 @@
         :class="{'btn-box-item-selected':curName=='plane'}"
         @click="showTextur('plane')"
       >平面</div>
+      <Checkbox v-model="isGray" @on-change="reRender" style=" margin-top: 3px;">灰度</Checkbox>
     </div>
     <three @threeLoaded="tLoaded($event)" :options="options"></three>
   </div>
@@ -35,8 +36,10 @@ export default {
         orbitControl: null,
         stats: null
       },
+      isGray: false,
       curName: "ball",
       material: null,
+      geometry: null,
       mesh: null
     };
   },
@@ -50,6 +53,20 @@ export default {
       let vm = this;
       vm.T = threeObj;
 
+      this.showTextur(this.curName);
+      this.doRender();
+    },
+
+    showTextur(name) {
+      if (name == "animate") {
+      } else if (name != "ball") {
+        this.geometry = new THREE.PlaneBufferGeometry(204, 102);
+      } else {
+        this.geometry = new THREE.SphereBufferGeometry(60, 25, 25);
+      }
+      this.reRender();
+    },
+    baseMaterial() {
       this.material = new THREE.ShaderMaterial({
         uniforms: {
           texture: {
@@ -57,27 +74,17 @@ export default {
           }
         },
         vertexShader: texture.vertex,
-        fragmentShader: texture.fragment,
+        fragmentShader: this.isGray ? texture.fragmentGray : texture.fragment,
         side: THREE.DoubleSide
       });
-      this.showTextur(this.curName);
-      this.doRender();
     },
-
-    showTextur(name) {
-      let geometry = null;
-      if (name != "ball") {
-        geometry = new THREE.PlaneBufferGeometry(204, 102);
-      } else {
-        geometry = new THREE.SphereBufferGeometry(60, 25, 25);
-      }
+    reRender() {
+      this.baseMaterial();
       this.T.scene.remove(this.mesh);
-
-      this.mesh = new THREE.Mesh(geometry, this.material);
+      this.mesh = new THREE.Mesh(this.geometry, this.material);
       this.T.scene.add(this.mesh);
       this.curName = name;
     },
-
     doRender() {
       this.T.stats.update();
       this.T.renderer.render(this.T.scene, this.T.camera);

@@ -23,6 +23,7 @@
             <MenuItem name="gltf">gltfloader</MenuItem>
             <MenuItem name="fbx">fbxloader 粒子系统</MenuItem>
             <MenuItem name="texture">Texture</MenuItem>
+             <MenuItem name="uvanimate">UV动画</MenuItem>
           </Submenu>
         </Menu>
       </Sider>
