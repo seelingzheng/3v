@@ -36,15 +36,15 @@
   </div>
 </template>
  <script>
-document.addEventListener(
-  "touchmove",
-  function(event) {
-    event.preventDefault();
-  },
-  {
-    passive: false
-  }
-);
+// document.addEventListener(
+//   "touchmove",
+//   function(event) {
+//     event.preventDefault();
+//   },
+//   {
+//     passive: false
+//   }
+// );
 export default {
   methods: {
     onSelect(name) {
@@ -70,8 +70,8 @@ body {
   user-select: none;
   position: absolute;
   width: auto;
-  top: 20px;
-  right: 100px;
+  top: 60px;
+  left: 220px;
   z-index: 1;
   display: flex;
   flex-wrap: wrap;

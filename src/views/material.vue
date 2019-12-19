@@ -20,6 +20,7 @@ import three from "@/components/three";
 import * as THREE from "three";
 import OrbitControls from "three-orbitcontrols";
 import { transfer } from "@/shaders";
+import * as dat from "dat.gui";
 export default {
   name: "",
 
@@ -38,20 +39,38 @@ export default {
         orbitControl: null,
         stats: null
       },
-      curMesh: null
+      curMesh: null,
+      gui: undefined
     };
   },
   components: {
     three
   },
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    this.initDatGui();
+  },
   methods: {
     tLoaded(threeObj) {
       this.T = threeObj;
 
       this.geometry = new THREE.BoxGeometry(100, 100, 100);
       this.doRender("single");
+    },
+    initDatGui() {
+      let gui = {
+        positionX: 0,
+        positionY: 0,
+        positionZ: 0,
+        update: () => {
+         this.curMesh.position.set(gui.positionX, gui.positionY, gui.positionZ);
+        }
+      };
+      var datGui = new dat.GUI();
+      //将设置属性添加到gui当中，gui.add(对象，属性，最小值，最大值）
+      datGui.add(gui, "positionX", -10, 10).onChange(gui.update);
+      datGui.add(gui, "positionY", -10, 10).onChange(gui.update);
+      datGui.add(gui, "positionZ", -10, 10).onChange(gui.update);
     },
 
     doRender(name) {

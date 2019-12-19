@@ -106,7 +106,8 @@ export default {
       this.stats = Stats();
       // 将性能监控屏区显示在左上角
       this.stats.domElement.style.position = "absolute";
-      this.stats.domElement.style.bottom = "0px";
+      this.stats.domElement.style.left = "220px";
+      this.stats.domElement.style.width = "100px";
       this.stats.domElement.style.zIndex = 100;
       this.container = document.getElementById("base");
       this.container.appendChild(this.stats.domElement);

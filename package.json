@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@types/three": "^0.93.22",
+    "dat.gui": "^0.7.6",
     "iview": "^3.3.0",
     "three": "^0.102.1",
     "three-fbx-loader": "^1.0.3",
@@ -23,7 +24,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
-    "copy-webpack-plugin": "^5.0.0",
+    "copy-webpack-plugin": "^5.1.1",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
